@@ -1,0 +1,14 @@
+<% if user != current_user %>
+	<% case friendship_status(user) 
+		when false %>
+		<%= link_to 'Add Friend', user_friendships_path(user_id: user.id), method: :post %>
+	<% when 'friends' %>
+		<%= link_to 'Remove Friend', user_friendship_path(user_id: user.id, id: current_user.id), method: :delete %>
+	<% when 'request sent' %>
+		Friend request sent 
+		<%= link_to 'Remove friend request', user_friendship_path(user_id: user.id, id: current_user.id), method: :delete %>
+	<% when 'accept friend request' %>
+		<%= link_to 'Accept friend request', user_friendship_path(user_id: user.id, id: current_user.id), method: :patch %>
+		<%= link_to 'Decline friend request', user_friendship_path(user_id: user.id, id: current_user.id), method: :delete %>
+	<% end %>
+<% end %>

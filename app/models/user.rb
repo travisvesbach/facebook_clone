@@ -2,7 +2,7 @@ class User < ApplicationRecord
   	# Include default devise modules. Others available are:
   	# :confirmable, :lockable, :timeoutable and :omniauthable
   	devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
 
     has_many :friendships
     has_many :friends, -> { where('accepted = ?', true) }, through: :friendships
@@ -16,7 +16,7 @@ class User < ApplicationRecord
     	self.notifications.select { |n| n.read == false }
     end
 
-    def feed 
+    def feed_with_friends
     	friend_ids = "SELECT user_id FROM friendships WHERE friend_id = :user_id AND accepted = true"
     	Post.where("user_id IN (#{friend_ids}) OR user_id = :user_id", user_id: id)
     end
@@ -31,8 +31,29 @@ class User < ApplicationRecord
     end
 
     def remove_friend_notifications(target_user)
-      @notifications = Notification.select { |f| f.user == self and f.from == target_user or f.user == target_user and f.from == self}
+      @notifications = Notification.select { |f| f.user == self and f.from == target_user}
       @notifications.each { |f| f.delete }
+    end
+
+    def remove_comments_from_friend_post(target_user)
+      @comments = Comment.select { |f| f.user == self and f.post.user == target_user}
+      @comments.each { |f| f.delete }
+    end
+
+    def remove_likes_from_friend_post(target_user)
+      @likes = Like.select { |f| f.user == self and f.post.user == target_user}
+      @likes.each { |f| f.delete }
+    end
+
+    def from_omniauth(auth)
+      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+        user.email = auth.info.email
+        user.password = Devise.freindly_token[0,20]
+        user.name = auth.info.name
+        user.first_name = auth.info.first_name
+        user.last_name = auth.info.last_name
+        user.image = auth.info.image
+      end
     end
 
 end

@@ -1,7 +1,7 @@
 module FriendshipsHelper
 
-	def friendship_status
-		@target_user = User.find_by(id: params[:id])
+	def friendship_status(user)
+		@target_user = user
 		@friendship_from_user = Friendship.find_by(user: current_user, friend: @target_user)
 		@friendship_to_user = Friendship.find_by(user: @target_user, friend: current_user)
 
