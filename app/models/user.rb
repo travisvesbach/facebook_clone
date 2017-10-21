@@ -45,13 +45,14 @@ class User < ApplicationRecord
       @likes.each { |f| f.delete }
     end
 
-    def from_omniauth(auth)
+    def self.from_omniauth(auth)
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
         user.email = auth.info.email
-        user.password = Devise.freindly_token[0,20]
+        user.password = Devise.friendly_token[0,20]
         user.name = auth.info.name
-        user.first_name = auth.info.first_name
-        user.last_name = auth.info.last_name
+        name_parts = user.name.split(" ")
+        user.first_name = name_parts.first
+        user.last_name = name_parts.last
         user.image = auth.info.image
       end
     end
