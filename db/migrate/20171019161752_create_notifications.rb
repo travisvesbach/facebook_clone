@@ -4,6 +4,7 @@ class CreateNotifications < ActiveRecord::Migration[5.1]
       t.belongs_to :user
       t.belongs_to :from
       t.string :content
+      t.string :topic
       t.boolean :read, :default => false
 
       t.timestamps

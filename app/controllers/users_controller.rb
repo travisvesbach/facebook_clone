@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
 	before_action :authenticate_user!
 	include FriendshipsHelper
-  include NotificationsHelper
 
   	def index
   		@users = User.all
@@ -13,7 +12,7 @@ class UsersController < ApplicationController
   	end
 
   	def destroy
-      remove_notifications
+      current_user.remove_all_notifications
   		remove_friendships
   		redirect_to current_user.destroy
   	end
