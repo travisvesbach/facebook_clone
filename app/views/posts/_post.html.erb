@@ -1,47 +1,73 @@
-<li>
-	<div class="post-user">
-		<%= link_to post.user.email, post.user %>
-	</div>
-	<div class="post-content">
-		<%= post.content %>
-	</div>
-	<div class="timestamp">
-		Posted <%= time_ago_in_words(post.created_at) %> ago.
-	</div>
-	<div class="likes">
-		<div class="dropdown">
-	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-	        	<%= pluralize(post.likes.count, "like") %> <b class="caret"></b>
-	        </a>
-	       	<ul class="dropdown-menu">
-	       		<% if post.likes.any? %>
-		       		<% post.likes.each do |like| %>
-		       			<li>
-	       					<%= link_to like.user.email, like.user %>
-	    	   			</li>
-	    	   		<% end %>
-	    	   	<% else %>
-	    	   		<li>No likes yet</li>
-	    	   	<% end %>
-	       	</ul>
-	    </div>
-		<% if current_user == post.user %>
-			<%= link_to "Delete post", post, method: :delete, data: {confirm: "Are you sure?"} %>
-		<% elsif !current_user.like?(post) %>
-			<%= link_to "Like", post_likes_path(post.id), method: :post %>
-		<% else %>
-			<%= link_to "Unlike", post_like_path(post.id, Like.find_by(post: post, user: current_user)), method: :delete %>
+<div class="post-container">
+	<div class="post-upper"> 
+		<div class="post-user">
+			<% if !post.user.image.nil? %>
+				<img src="<%= post.user.image %>" class="index-image">
+			<% else %>
+				<img src="<%= asset_path( 'noimage.jpg' ) %>" style="width: 50px;">
+			<% end %>
+			<p>
+				<%= link_to post.user.name, post.user, class: "post-user-name" %><br>
+				<span class="post-timestamp">
+					Posted <%= time_ago_in_words(post.created_at) %> ago.
+				</span>
+			</p>
+			<% if current_user == post.user %>
+				<%= link_to "X", post, method: :delete, data: {confirm: "Are you sure you want to remove this post?"}, class: "post-delete" %>
+			<% end %>
+		</div>
+		<div class="post-content">
+			<%= post.content %>
+		</div>
+		<% if current_user != post.user %>
+			<div class="post-like">
+				<% if !current_user.like?(post) %>
+					&#128077;<%= link_to "Like", post_likes_path(post.id), method: :post %>
+				<% else %>
+					<%= link_to "Unlike", post_like_path(post.id, Like.find_by(post: post, user: current_user)), method: :delete %>
+				<% end %>
+			</div>
 		<% end %>
 	</div>
-	<div class="comments">
-		<% if post.comments.any? %>
-	    	<% post.comments.each do |comment| %>
-	    		<li>
-	    			<%= comment.content %> | by: <%= link_to comment.user.email, comment.user %>
-	    			<%= link_to "Delete comment", post_comment_path(post.id, comment), method: :delete if comment.user == current_user %>
-	    		</li>
-	    	<% end %>
-	    <% end %>
-	    <%= render partial: 'comments/comment_form', locals: { post: post} %>
+	<div class="post-lower">
+		<div class="post-likes">
+			<div class="dropdown">
+		        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		        	<%= pluralize(post.likes.count, "like") %> <b class="caret"></b>
+		        </a>
+		       	<ul class="dropdown-menu">
+		       		<% if post.likes.any? %>
+			       		<% post.likes.each do |like| %>
+			       			<li>
+		       					<%= link_to like.user.name, like.user %>
+		    	   			</li>
+		    	   		<% end %>
+		    	   	<% else %>
+		    	   		<li> No likes yet</li>
+		    	   	<% end %>
+		       	</ul>
+		    </div>
+		</div>
+		<div class="post-comments">
+			<% if post.comments.any? %>
+		    	<% post.comments.each do |comment| %>
+		    		<div class="post-comment">
+		    			<% if !comment.user.image.nil? %>
+							<img src="<%= comment.user.image %>?width=30" class="index-image">
+						<% else %>
+							<img src="<%= asset_path( 'noimage.jpg' ) %>" style="width: 30px;">
+						<% end %>
+						<p>
+		    				<strong><%= link_to comment.user.name, comment.user %></strong> <%= comment.content %><br>
+		   					<span class="post-comment-timestamp">
+		    					Posted <%= time_ago_in_words(comment.created_at) %> ago.
+		    				</span>
+		    			</p>
+		    			<%= link_to "X", post_comment_path(post.id, comment), method: :delete, data: {confirm: "Are you sure you want to remove this comment?"}, class: "post-comment-delete" if comment.user == current_user %>
+		    		</div>
+		    	<% end %>
+		    <% end %>
+		    <%= render partial: 'comments/comment_form', locals: { post: post} %>
+		</div>
 	</div>
-</li>
+</div>

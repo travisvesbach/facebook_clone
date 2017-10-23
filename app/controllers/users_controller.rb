@@ -3,12 +3,12 @@ class UsersController < ApplicationController
 	include FriendshipsHelper
 
   	def index
-  		@users = User.all
+  		@users = User.paginate(page: params[:page])
   	end
 
   	def show
   		@user = User.find_by(id: params[:id])
-      @feed_items = @user.posts
+      @feed_items = @user.posts.paginate(page: params[:page])
       @post = current_user.posts.build if user_signed_in?
       @comment = current_user.comments.build if user_signed_in?
   	end

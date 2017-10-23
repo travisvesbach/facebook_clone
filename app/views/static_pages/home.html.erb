@@ -1,5 +1,12 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
 <% if user_signed_in? %>
-	<%= render 'static_pages/home_logged_in' %>
+
+	<%= render 'shared/post_form' %>
+	<%= render 'shared/feed' %>
+
+<% else %>
+	<h3 class="welcome">
+		Welcome to Fakebook! A Facebook clone made using Ruby on Rails!<br> <br>
+		Feel free to log in and take a look around! You can add users, make posts, like posts, make comments on posts, etc.  There are a few default users that you can find on the users page.  The default users will respond to any friend requests you send them and then you can see all their posts and comments!<br> <br>
+		Thanks for stopping by and please let me know if you have any questions!   
+	</h3>
 <% end %>

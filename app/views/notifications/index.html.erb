@@ -1,7 +1,10 @@
-<h1>Notifications#index</h1>
+<h1 class="title">Notifications</h1>
 
-<ul>
+<div class="notifications">
 	<% @notifications.each do |notification| %>
-		<li><%= notification.content %></li>
+		<div class="notification">
+			<%= notification.content %>  
+			<span><%= time_ago_in_words( notification.created_at ) %> ago.</span>
+		</div>
 	<% end %>
-</ul>
+</div>

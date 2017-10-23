@@ -6,10 +6,9 @@ class PostsController < ApplicationController
   	@post = current_user.posts.build(post_params)
   		if @post.save
   			flash[:notice] = "Post created!"
-  			redirect_to root_url
+  			redirect_back(fallback_location: root_url)
   		else
-        @feed_items = []
-  			render 'static_pages/home'
+        redirect_back(fallback_location: root_url)
   		end
   end
 

@@ -1,5 +1,6 @@
 <% if @feed_items.any? %>
-	<ul class="feed_items">
+<!--	<ul class="feed_items"> -->
 		<%= render @feed_items %>
-	</ul>
+		<%= will_paginate @feed_items %>
+<!--	</ul> -->
 <% end %>

@@ -1,15 +1,258 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+html {
+	position: relative;
+	min-height: 100%; 
+}
+
 body {
 	background-color: #e9ebee;
 }
 
+.welcome {
+	background-color: #fff;
+	border-radius: 4px;
+	border: solid 1px #cccdce;
+	margin: 5px 0px;
+	position: relative;
+	width: 800px;
+	left: 50%;
+	margin-left: -400px;
+	padding: 10px;
+	top: 150px;
+}
 .navbar {
-/*	border: solid 1px black;
-	background-color: #4267b2; */
+	border-radius: 0px;
+	background-color: #4267b2; 
+	#logo {
+  		float: left;
+  		margin-right: 10px;
+  		font-size: 1.7em;
+  		color: white;
+  		padding-top: 9px;
+  		font-weight: bold;
+  		&:hover {
+    		text-decoration: none;
+  		}
+	}
+	.nav-link {
+		color: white;
+		&:hover {
+    		background-color: #3c5fa8;
+  		}
+  		&:focus {
+  			background-color: #3c5fa8 !important;
+  		}
+	}
 }
 
-.profile-image {
 
+.footer {
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	margin-top: 20px;
+	padding-top: 10px;
+	border-top: solid 1px #cccdce;
+	p {
+		float: right;
+		padding-right: 30px;
+	}
+}
+
+.post-container {
+	border-radius: 4px;
+	border: solid 1px #cccdce;
+	margin: 5px 0px;
+	position: relative;
+	width: 600px;
+	left: 50%;
+	margin-left: -300px;
+	.post-upper {
+		background-color: #fff;
+		padding: 15px 15px 0px 15px;
+		border-bottom: solid 1px #cccdce;
+		.post-user {
+			p {
+				display: inline-block;
+				position: relative;
+				vertical-align: middle;
+				.post-user-name {
+					font-weight: bold;
+				}
+				.post-timestamp {
+					color: #abacad;
+				}
+			}
+			.post-delete {
+				display: inline-block;
+				position: relative;
+				float: right;
+				vertical-align: top;
+			}
+		}
+		.post-content {
+			padding: 10px 5px;
+		}
+		.post-like {
+			border-top: solid 1px #cccdce;
+			padding: 5px 0px;
+		}
+	}
+	.post-lower {
+		background-color: #f6f7f9;
+		padding: 0px 15px 15px 15px;	
+		.post-likes {
+				border-bottom: solid 1px #cccdce;
+				margin-bottom: 5px;
+				padding: 5px 0px;
+		}
+		.post-comment {
+			
+			img {
+			
+			}
+			p {
+				display: inline-block;
+				position: relative;
+				vertical-align: top;
+				max-width: 520px;
+				span {
+					color: #abacad;
+				}
+			}
+			.post-comment-delete {
+				display: inline-block;
+				position: relative;
+				float: right;
+				vertical-align: top;
+			}
+		}
+		.comment-form {
+			padding-top: 5px;
+			.text-area {
+				width: 440px;
+				height: 50px;
+				vertical-align: middle;
+			}
+		}
+	}
+}
+
+.post-form {
+	background-color: #fff;
+	border-radius: 4px;
+	border: solid 1px #cccdce;
+	padding: 15px;
+	margin: 5px 0px;
+	width: 600px;
+	height: auto;
+	position: relative;
+	left: 50%;
+	margin-left: -300px;
+	display: inline-block;
+	.text-area {
+		width: 500px;
+		height: 75px;
+		vertical-align: middle;
+	}
+	.btn {
+		margin-top: 5px;
+		display: inline-block;
+		float: right;
+		margin-right: 25px;
+	}
+	img {
+		position: relative;
+		top: 0%;
+		vertical-align: middle;
+	}
+}
+
+
+.title {
+	margin-left: 20px;
+}
+
+.user-show-sidebar {
+	position: relative;
+	width: 250px;
+	display: inline-block;
+	padding-left: 15px;
+	vertical-align: top;
+	.profile-image {
+		margin: 10px 0px;
+	}
+	.btn {
+		margin: 10px 0px;
+		position: relative;
+
+	}
+	.user-show-friends {
+		background-color: #fff;
+		border-radius: 4px;
+		border: solid 1px #cccdce;
+		padding: 5px;
+		width: 240px;
+		margin: 10px 0px;
+		h3 {
+			margin-top: 0px;
+		}
+	}
+}
+
+.user-show-center {
+	width: 620px;
+	display: inline-block;
+	position: relative;
+	left: 10%;
+	margin-bottom: 50px;
+	h3 {
+		margin-top: 5px;
+	}
+}
+
+.user-delete {	
+	position: absolute;
+	float: left;
+	bottom: 40px;
+}
+
+.user-index {
+	background-color: #fff;
+	border-radius: 4px;
+	border: solid 1px #cccdce;
+	width: 600px;
+	position: relative;
+	left: 50%;
+	margin-left: -300px;
+	padding: 15px;
+	.pagination {
+		margin: 5px;
+	}
+	.user-index-user {
+		padding: 10px;
+		border-bottom: solid 1px #cccdce;
+		.btn {
+			float: right;
+		}
+	}
+}
+
+.notifications {
+	background-color: #fff;
+	width: 600px;
+	position: relative;
+	left: 50%;
+	margin-left: -300px;
+	padding: 15px;
+	.notification {
+		padding: 10px;
+		border-bottom: solid 1px #cccdce;
+		span {
+			float: right;
+			color: #abacad;
+		}
+	}
 }

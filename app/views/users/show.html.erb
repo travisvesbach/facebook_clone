@@ -1,25 +1,47 @@
-<h1><%= @user.name %></h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<h1 class="title"><%= @user.name %></h1>
 
-<img src="<%= @user.image %>?width=200" class="profile-image">
-<p><%= @user.email %></p>
-
-<%= render partial: 'friendships/add_remove_friend', locals: { user: @user } %>
-
-<h3>Friends list</h3>
-<ul>
-	<% @user.friends.each do |friend| %>
-		<li>
-			<%= link_to "#{friend.email}", friend %>
-		</li>
+<div class="user-show-sidebar">
+	<% if !@user.image.nil? %>
+		<img src="<%= @user.image %>?width=250" class="profile-image">
+	<% else %>
+		<img src="<%= asset_path( 'noimage.jpg' ) %>" style="width: 250px;" class="profile-image">
 	<% end %>
-</ul>
 
-<%= render 'shared/post_form' if @user == current_user %> 
+	<%= render partial: 'friendships/add_remove_friend', locals: { user: @user } %>
 
-<h3>Posts</h3>
-<%= render 'shared/feed' if @user == current_user or friendship_status(@user) == "friends" %>
+	<div class="user-show-friends">
+		<h3>Friends </h3>
+		<ul>
+			<% if @user.friends.count > 0 %>
+				<% @user.friends.each do |friend| %>
+					<div class="user-friend">
+						<% if !friend.image.nil? %>
+							<img src="<%= friend.image %>" class="index-image">
+						<% else %>
+							<img src="<%= asset_path( 'noimage.jpg' ) %>" style="width: 50px;">
+						<% end %>
+						<%= link_to "#{friend.name}", friend %>
+					</div>
+				<% end %>
+			<% else %>
+				<% if @user == current_user %>
+					You don't have any friends yet..
+				<% else %>
+					<%= @user.first_name %> does not have any friends yet..
+				<% end %>
+			<% end %>
+		</ul>
+	</div>
+</div>
 
+<div class="user-show-center">
+	<h3>Posts</h3>
+	<%= render 'shared/post_form' if @user == current_user %> 
+	<%= render 'shared/feed' if @user == current_user or friendship_status(@user) == "friends" %>
+</div>
+
+<div class="user-delete">
 <% if @user == current_user %>
 	<%= link_to "delete user", user_path, method: :delete, data: {confirm: "Are you sure?"} %>
 <% end %>
+</div>

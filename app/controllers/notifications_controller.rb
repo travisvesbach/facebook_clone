@@ -1,4 +1,6 @@
 class NotificationsController < ApplicationController
+  before_action :user_signed_in?
+  
   	def index
   		unless current_user.id == params[:id]
   			@notifications = current_user.notifications.all

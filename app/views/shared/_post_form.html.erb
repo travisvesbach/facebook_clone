@@ -1,5 +1,12 @@
-<%= form_for(@post) do |f| %>
-	<%= render 'shared/error_messages', object: f.object %>
-	<%= f.text_area :content, placeholder: "Compose new post..." %>
-	<%= f.submit "Post", class: "btn btn-primary" %>
-<% end %>
+<div class="post-form">
+	<%= form_for(@post) do |f| %>
+		<%= render 'shared/error_messages', object: f.object %>
+		<% if !current_user.image.nil? %>
+			<img src="<%= current_user.image %>?width=50" class="profile-image">
+		<% else %>
+			<img src="<%= asset_path( 'noimage.jpg' ) %>" style="width: 50px;" class="profile-image">
+		<% end %>
+		<%= f.text_area :content, placeholder: "  What's on your mind, #{@current_user.first_name}?", class: "text-area" %>
+		<%= f.submit "Post", class: "btn btn-primary" %>
+	<% end %>
+</div>

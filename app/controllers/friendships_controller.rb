@@ -1,11 +1,19 @@
 class FriendshipsController < ApplicationController
-
+	before_action :user_signed_in?
 
 	def create
 		@target_user = User.find_by(id: params[:user_id])
-		Friendship.create!(user: current_user, friend: @target_user)
-		Notification.create!(user: @target_user, from: current_user, content: "#{current_user} sent you a friend request!", topic: "friend")
-		flash[:notice] = 'Friend request sent.'
+		@seeded_users = [1,2,3,4,5]
+		if @seeded_users.include? @target_user.id 
+			Friendship.create!(user: current_user, friend: @target_user, accepted: true)
+			Friendship.create!(user: @target_user, friend: current_user, accepted: true)	
+			Notification.create!(user: current_user, from: @target_user, content: "#{@target_user.name} accepted your friend request! You are now friends!", topic: "friend")
+			flash[:notice] = "Friend added! You are now friends with #{@target_user.name}!" 					
+		else
+			Friendship.create!(user: current_user, friend: @target_user)
+			Notification.create!(user: @target_user, from: current_user, content: "#{current_user.name} sent you a friend request!", topic: "friend")
+			flash[:notice] = 'Friend request sent.'
+		end
 		redirect_back(fallback_location: root_url)
 	end
 
@@ -14,8 +22,8 @@ class FriendshipsController < ApplicationController
 		@friendship = Friendship.find_by(user: @target_user, friend: current_user)
 		@friendship.update_attribute(:accepted, true) 
 		Friendship.create!(user: current_user, friend: @target_user, accepted: true)
-		Notification.create!(user: @target_user, from: current_user, content: "#{current_user} accepted your friend request! You are now friends!", topic: "friend")
-		flash[:notice] = "Friend added! You are now friends with #{@target_user}!" 
+		Notification.create!(user: @target_user, from: current_user, content: "#{current_user.name} accepted your friend request! You are now friends!", topic: "friend")
+		flash[:notice] = "Friend added! You are now friends with #{@target_user.name}!" 
 		redirect_back(fallback_location: root_url)
 	end
 

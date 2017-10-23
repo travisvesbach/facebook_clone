@@ -1,5 +1,5 @@
 <li class="dropdown">
-	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
 		Notifications [<%= current_user.unread_notifications.count %>] <b class="caret"></b>
 	</a>
 	<ul class="dropdown-menu">
@@ -8,9 +8,7 @@
 				<li>
 	    			<%= link_to "#{notification.content}", notification %>
 	    		</li>
-	    	<% end %>
-	    <% else %>
-	    	<li>No new notifications</li>		
+	    	<% end %>		
 	    <% end %>
 		<li class="divider"></li>
 		<li>

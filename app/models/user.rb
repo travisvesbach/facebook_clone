@@ -12,6 +12,10 @@ class User < ApplicationRecord
     has_many :likes, dependent: :destroy
     has_many :comments, dependent: :destroy
 
+    default_scope -> { order(name: :asc) }
+
+    after_create :send_welcome_mail
+
     def unread_notifications
     	self.notifications.select { |n| n.read == false }
     end
@@ -55,6 +59,10 @@ class User < ApplicationRecord
         user.last_name = name_parts.last
         user.image = auth.info.image
       end
+    end
+
+    def send_welcome_mail
+      UserMailer.welcome_mailer(self).deliver_now
     end
 
 end

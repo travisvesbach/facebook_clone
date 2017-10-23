@@ -1,5 +1,12 @@
-<%= form_for(@comment, url: post_comments_path(post.id)) do |f| %>
-	<%= render 'shared/error_messages', object: f.object %>
-	<%= f.text_area :content, placeholder: "Comment here..." %>
-	<%= f.submit "Post", class: "btn btn-primary" %>
-<% end %>
+<div class="comment-form">	
+	<%= form_for(@comment, url: post_comments_path(post.id)) do |f| %>
+		<%= render 'shared/error_messages', object: f.object %>
+		<% if !current_user.image.nil? %>
+			<img src="<%= current_user.image %>?width=30" class="index-image">
+		<% else %>
+			<img src="<%= asset_path( 'noimage.jpg' ) %>" style="width: 30px;">
+		<% end %>
+		<%= f.text_area :content, placeholder: "Comment here...", class: "text-area" %>
+		<%= f.submit "Comment", class: "btn btn-primary" %>
+	<% end %>
+</div>
