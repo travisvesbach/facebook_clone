@@ -1,7 +1,7 @@
 # Facebook Project for The Odin Project
 
-Start Date: October 17, 2017
-Most recent update: October 24, 2017
+* Start Date: October 17, 2017
+* Most recent update: October 24, 2017
 
 Live at: https://intense-chamber-14913.herokuapp.com/
 
@@ -15,9 +15,9 @@ There are 5 default users that can be added.  They will accept friend requests s
 
 ### Built using:
 
-Ruby on Rails - Web frameword
-Devise - Authentication
-Omniauth-facebook - Authentication
-Bootstrap - CSS framework
-Heroku - Cloud platform/server
-SendGrid - Email service
+* Ruby on Rails - Web frameword
+* Devise - Authentication
+* Omniauth-facebook - Authentication
+* Bootstrap - CSS framework
+* Heroku - Cloud platform/server
+* SendGrid - Email service
