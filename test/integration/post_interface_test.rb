@@ -14,7 +14,6 @@ class PostInterfaceTest < ActionDispatch::IntegrationTest
 		assert_no_difference 'Post.count' do
 			post posts_path, params: { post: { content: "" } }
 		end
-		assert_select 'div#error_explanation'
 		# Valid submission
 		content = "This post is hungry"
 		assert_difference 'Post.count', 1 do
