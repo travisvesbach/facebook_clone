@@ -1,5 +1,6 @@
 module FriendshipsHelper
 
+	# returns the current friendship status between two users
 	def friendship_status(user)
 		@target_user = user
 		@friendship_from_user = Friendship.find_by(user: current_user, friend: @target_user)
@@ -20,6 +21,7 @@ module FriendshipsHelper
 		end
 	end
 
+	# Removes all of a user's friendships
 	def remove_friendships
     	@friendships = Friendship.select { |f| f.user == current_user or f.friend == current_user}
     	@friendships.each { |f| f.delete }

@@ -1,5 +1,5 @@
 class NotificationsController < ApplicationController
-  before_action :user_signed_in?
+  before_action :authenticate_user!
   
   	def index
   		unless current_user.id == params[:id]

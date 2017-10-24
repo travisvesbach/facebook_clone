@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :user_signed_in?
+  before_action :authenticate_user!
   before_action :correct_user, only: [:destroy]
 
   def create

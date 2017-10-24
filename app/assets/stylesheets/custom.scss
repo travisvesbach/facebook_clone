@@ -10,6 +10,10 @@ body {
 	background-color: #e9ebee;
 }
 
+#content {
+	margin-top: 65px;
+}
+
 .welcome {
 	background-color: #fff;
 	border-radius: 4px;
@@ -25,25 +29,33 @@ body {
 .navbar {
 	border-radius: 0px;
 	background-color: #4267b2; 
-	#logo {
-  		float: left;
-  		margin-right: 10px;
-  		font-size: 1.7em;
-  		color: white;
-  		padding-top: 9px;
-  		font-weight: bold;
-  		&:hover {
-    		text-decoration: none;
-  		}
-	}
-	.nav-link {
-		color: white;
-		&:hover {
-    		background-color: #3c5fa8;
-  		}
-  		&:focus {
-  			background-color: #3c5fa8 !important;
-  		}
+	position: fixed;
+	width: 100%;
+	top: 0;
+	z-index: 100;
+	.container {
+	margin-left: 80px;
+	margin-right: auto;
+		#logo {
+	  		float: left;
+	  		margin-right: 10px;
+	  		font-size: 1.7em;
+	  		color: white;
+	  		padding-top: 9px;
+	  		font-weight: bold;
+	  		&:hover {
+	    		text-decoration: none;
+	  		}
+		}
+		.nav-link {
+			color: white;
+			&:hover {
+	    		background-color: #3c5fa8;
+	  		}
+	  		&:focus {
+	  			background-color: #3c5fa8 !important;
+	  		}
+		}
 	}
 }
 
@@ -62,6 +74,7 @@ body {
 }
 
 .post-container {
+	background-color: #fff;
 	border-radius: 4px;
 	border: solid 1px #cccdce;
 	margin: 5px 0px;
@@ -74,6 +87,9 @@ body {
 		padding: 15px 15px 0px 15px;
 		border-bottom: solid 1px #cccdce;
 		.post-user {
+			img {
+				border-radius: 25px;
+			}
 			p {
 				display: inline-block;
 				position: relative;
@@ -111,7 +127,7 @@ body {
 		.post-comment {
 			
 			img {
-			
+				border-radius: 15px;
 			}
 			p {
 				display: inline-block;
@@ -136,6 +152,9 @@ body {
 				height: 50px;
 				vertical-align: middle;
 			}
+			img {
+				border-radius: 15px;
+			}
 		}
 	}
 }
@@ -154,7 +173,7 @@ body {
 	display: inline-block;
 	.text-area {
 		width: 500px;
-		height: 75px;
+		height: 70px;
 		vertical-align: middle;
 	}
 	.btn {
@@ -167,6 +186,7 @@ body {
 		position: relative;
 		top: 0%;
 		vertical-align: middle;
+		border-radius: 25px;
 	}
 }
 
@@ -242,6 +262,8 @@ body {
 
 .notifications {
 	background-color: #fff;
+	border-radius: 4px;
+	border: solid 1px #cccdce;
 	width: 600px;
 	position: relative;
 	left: 50%;
