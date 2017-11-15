@@ -16,7 +16,7 @@
 				<% @user.friends.each do |friend| %>
 					<div class="user-friend">
 						<% if !friend.image.nil? %>
-							<img src="<%= friend.image %>" class="index-image">
+							<img src="<%= friend.image %>?width=50" class="index-image">
 						<% else %>
 							<img src="<%= asset_path( 'noimage.jpg' ) %>" style="width: 50px;">
 						<% end %>

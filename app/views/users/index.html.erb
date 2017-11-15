@@ -6,7 +6,7 @@
 <% @users.each do |user| %>
 	<div class="user-index-user">
 		<% if !user.image.nil? %>
-			<img src="<%= user.image %>" class="index-image">
+			<img src="<%= user.image %>?width=50" class="index-image">
 		<% else %>
 			<img src="<%= asset_path( 'noimage.jpg' ) %>" style="width: 50px;">
 		<% end %>
